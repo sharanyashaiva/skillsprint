@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSprint | Student Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+      <h1>SkillSprint</h1>
+      <p>Small steps. Real skills. Better opportunities.</p>
+    </header>
+
+    <section class="card">
+      <h2>Add a task</h2>
+      <form id="task-form">
+        <label for="task-name">What do you want to achieve?</label>
+        <input id="task-name" type="text"
+               placeholder="e.g. Practise JavaScript" required>
+
+        <label for="task-date">Deadline</label>
+        <input id="task-date" type="date" required>
+
+        <button type="submit">+ Add task</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="task-heading">
+        <h2>My tasks</h2>
+        <span id="task-count">0 tasks</span>
+      </div>
+      <ul id="task-list"></ul>
+      <p id="empty-message">Your next achievement starts here.</p>
+    </section>
+
+    <footer>
+      Built by me, one feature at a time.
+    </footer>
+  </main>
+</body>
+</html>

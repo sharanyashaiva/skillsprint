@@ -1,0 +1,164 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f5fb;
+  color: #202a44;
+}
+
+.container {
+  width: min(680px, 92%);
+  margin: 40px auto;
+}
+
+header {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: #3868d6;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 40px;
+  margin: 8px 0;
+}
+
+header > p:last-child {
+  color: #68738a;
+}
+
+.card {
+  background: white;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px #18294b0d;
+}
+
+h2 {
+  font-size: 19px;
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin: 16px 0 7px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9dfeb;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+button {
+  padding: 12px 16px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #315fd3;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.88;
+}
+
+.task-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#task-count {
+  color: #68738a;
+  font-size: 13px;
+}
+
+#task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid #e9edf5;
+  padding: 14px 0;
+}
+
+.task-info {
+  overflow-wrap: anywhere;
+}
+
+.task-info small {
+  display: block;
+  color: #68738a;
+  margin-top: 5px;
+}
+
+.task.done .task-title {
+  text-decoration: line-through;
+  color: #7b879c;
+}
+
+.task-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.task-actions button {
+  margin: 0;
+  padding: 8px;
+  font-size: 12px;
+}
+
+.delete-btn {
+  background: #b83242;
+}
+
+#empty-message,
+footer {
+  color: #68738a;
+  font-size: 13px;
+}
+
+footer {
+  text-align: center;
+  padding: 16px;
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-top: 24px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .task {
+    align-items: flex-start;
+  }
+}
