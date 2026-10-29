@@ -1,47 +1,108 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillSprint | Student Planner</title>
+  <title>SkillSprint | Student Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="container">
-    <header>
-      <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
-      <h1>SkillSprint</h1>
-      <p>Small steps. Real skills. Better opportunities.</p>
-    </header>
-
-    <section class="card">
-      <h2>Add a task</h2>
-      <form id="task-form">
-        <label for="task-name">What do you want to achieve?</label>
-        <input id="task-name" type="text"
-               placeholder="e.g. Practise JavaScript" required>
-
-        <label for="task-date">Deadline</label>
-        <input id="task-date" type="date" required>
-
-        <button type="submit">+ Add task</button>
-      </form>
-    </section>
-
-    <section class="card">
-      <div class="task-heading">
-        <h2>My tasks</h2>
-        <span id="task-count">0 tasks</span>
+  <div class="app">
+    <aside class="sidebar">
+      <h2 class="brand">Skill<span>Sprint</span></h2>
+      <p class="side-label">WORKSPACE</p>
+      <a class="nav active" href="#dashboard">▦ &nbsp; Dashboard</a>
+      <a class="nav" href="#tasks">✓ &nbsp; My Tasks</a>
+      <div class="sidebar-bottom">
+        <div class="avatar">S</div>
+        <div>
+          <strong>My Workspace</strong>
+          <small>Keep learning every day</small>
+        </div>
       </div>
-      <ul id="task-list"></ul>
-      <p id="empty-message">Your next achievement starts here.</p>
-    </section>
+    </aside>
 
-    <footer>
-      Built by me, one feature at a time.
-    </footer>
-  </main>
+    <main class="main" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+          <h1>Welcome back! 👋</h1>
+          <p class="subtitle">Small steps. Real skills. Better opportunities.</p>
+        </div>
+        <div class="today" id="today"></div>
+      </header>
+
+      <section class="stats">
+        <article class="stat-card">
+          <div class="stat-icon blue">▤</div>
+          <p>Total tasks</p>
+          <h2 id="totalTasks">0</h2>
+          <small>All your learning goals</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon green">✓</div>
+          <p>Completed</p>
+          <h2 id="completedTasks">0</h2>
+          <small>Tasks you've finished</small>
+        </article>
+        <article class="stat-card">
+          <div class="stat-icon orange">◷</div>
+          <p>Pending</p>
+          <h2 id="pendingTasks">0</h2>
+          <small>Keep moving forward</small>
+        </article>
+      </section>
+
+      <section class="panel progress-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Your progress</h2>
+            <p class="muted">Every completed task takes you closer to your goals.</p>
+          </div>
+          <strong class="percentage" id="progressPercent">0%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-note" id="progressNote">Let's complete your first task!</p>
+      </section>
+
+      <section class="workspace" id="tasks">
+        <section class="panel task-panel">
+          <div class="panel-heading">
+            <div>
+              <h2>My learning tasks</h2>
+              <p class="muted">Plan your next step and stay consistent.</p>
+            </div>
+          </div>
+
+          <form id="taskForm">
+            <label for="taskName">Task name</label>
+            <input id="taskName" type="text"
+                   placeholder="e.g. Practise JavaScript" required maxlength="120">
+
+            <label for="taskDeadline">Deadline</label>
+            <input id="taskDeadline" type="date">
+
+            <button class="primary-btn" type="submit">+ Add task</button>
+          </form>
+
+          <div class="task-list" id="taskList"></div>
+        </section>
+
+        <aside class="panel tip-panel">
+          <div class="tip-icon">✦</div>
+          <h2>A little reminder</h2>
+          <p>You don't need to learn everything in one day. Focus on one skill, finish one task, and keep building.</p>
+          <div class="tip-line"></div>
+          <strong>Today's rule</strong>
+          <p class="muted">Consistency beats perfection.</p>
+        </aside>
+      </section>
+
+      <footer>Built by me, one feature at a time. ✨</footer>
+    </main>
+  </div>
 </body>
 </html>

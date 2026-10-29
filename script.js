@@ -1,65 +1,68 @@
+const STORAGE_KEY = "skillsprint-dashboard-tasks";
 
-const form = document.querySelector("#task-form");
-const nameInput = document.querySelector("#task-name");
-const dateInput = document.querySelector("#task-date");
-const taskList = document.querySelector("#task-list");
-const taskCount = document.querySelector("#task-count");
-const emptyMessage = document.querySelector("#empty-message");
+const form = document.getElementById("taskForm");
+const nameInput = document.getElementById("taskName");
+const deadlineInput = document.getElementById("taskDeadline");
+const taskList = document.getElementById("taskList");
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-try {
-  const saved = JSON.parse(
-    localStorage.getItem("skillsprint-tasks") || "[]"
-  );
-
-  if (Array.isArray(saved)) {
-    tasks = saved.filter(
-      task =>
-        task &&
-        typeof task.id === "string" &&
-        typeof task.name === "string" &&
-        typeof task.date === "string" &&
-        typeof task.done === "boolean"
-    );
-  }
-} catch {
-  tasks = [];
-}
+document.getElementById("today").textContent =
+  new Date().toLocaleDateString("en-IN", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
 
 function saveTasks() {
-  try {
-    localStorage.setItem(
-      "skillsprint-tasks",
-      JSON.stringify(tasks)
-    );
-  } catch {
-    alert("Could not save tasks in this browser.");
-  }
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
 function renderTasks() {
+  const total = tasks.length;
+  const completed = tasks.filter(task => task.completed).length;
+  const pending = total - completed;
+  const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+  document.getElementById("totalTasks").textContent = total;
+  document.getElementById("completedTasks").textContent = completed;
+  document.getElementById("pendingTasks").textContent = pending;
+  document.getElementById("progressPercent").textContent = percent + "%";
+  document.getElementById("progressFill").style.width = percent + "%";
+
+  const note = total === 0
+    ? "Let's complete your first task!"
+    : percent === 100
+      ? "Amazing! You've completed all your tasks."
+      : `${completed} of ${total} tasks completed. Keep going!`;
+
+  document.getElementById("progressNote").textContent = note;
+
   taskList.replaceChildren();
 
-  const completed = tasks.filter(task => task.done).length;
-  taskCount.textContent =
-    `${completed}/${tasks.length} completed`;
+  if (total === 0) {
+    const empty = document.createElement("p");
+    empty.className = "empty-state";
+    empty.textContent = "No tasks yet. Add your first learning goal above!";
+    taskList.appendChild(empty);
+    return;
+  }
 
-  emptyMessage.hidden = tasks.length > 0;
-
-  for (const task of tasks) {
-    const item = document.createElement("li");
-    item.className = "task" + (task.done ? " done" : "");
+  tasks.forEach(task => {
+    const item = document.createElement("div");
+    item.className = "task-item" + (task.completed ? " completed" : "");
 
     const info = document.createElement("div");
     info.className = "task-info";
 
-    const title = document.createElement("span");
-    title.className = "task-title";
+    const title = document.createElement("strong");
     title.textContent = task.name;
 
     const deadline = document.createElement("small");
-    deadline.textContent = "Deadline: " + task.date;
+    deadline.textContent = task.deadline
+      ? "Deadline: " + task.deadline
+      : "No deadline set";
 
     info.append(title, deadline);
 
@@ -67,14 +70,15 @@ function renderTasks() {
     actions.className = "task-actions";
 
     const toggle = document.createElement("button");
-    toggle.textContent = task.done ? "Undo" : "Done";
+    toggle.className = "done-btn";
+    toggle.textContent = task.completed ? "Undo" : "Done";
     toggle.setAttribute(
       "aria-label",
-      (task.done ? "Undo " : "Complete ") + task.name
+      (task.completed ? "Mark incomplete: " : "Complete: ") + task.name
     );
 
     toggle.addEventListener("click", () => {
-      task.done = !task.done;
+      task.completed = !task.completed;
       saveTasks();
       renderTasks();
     });
@@ -92,31 +96,25 @@ function renderTasks() {
 
     actions.append(toggle, remove);
     item.append(info, actions);
-    taskList.append(item);
-  }
+    taskList.appendChild(item);
+  });
 }
 
 form.addEventListener("submit", event => {
   event.preventDefault();
 
   const name = nameInput.value.trim();
-  const date = dateInput.value;
+  if (!name) return;
 
-  if (!name || !date) {
-    alert("Please enter a task and deadline.");
-    return;
-  }
-
-  tasks.push({
-    id: crypto.randomUUID(),
+  tasks.unshift({
+    id: Date.now().toString() + Math.random().toString(16).slice(2),
     name,
-    date,
-    done: false
+    deadline: deadlineInput.value,
+    completed: false
   });
 
   saveTasks();
   renderTasks();
-
   form.reset();
   nameInput.focus();
 });
