@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillSprint | Student Dashboard</title>
+  <title>SkillSprint | Learning Dashboard</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -12,13 +13,14 @@
     <aside class="sidebar">
       <h2 class="brand">Skill<span>Sprint</span></h2>
       <p class="side-label">WORKSPACE</p>
-      <a class="nav active" href="#dashboard">▦ &nbsp; Dashboard</a>
-      <a class="nav" href="#tasks">✓ &nbsp; My Tasks</a>
+      <a class="nav active" href="#dashboard">▦ Dashboard</a>
+      <a class="nav" href="#tasks">✓ My Tasks</a>
+
       <div class="sidebar-bottom">
         <div class="avatar">S</div>
         <div>
           <strong>My Workspace</strong>
-          <small>Keep learning every day</small>
+          <small>Learn something every day</small>
         </div>
       </div>
     </aside>
@@ -40,49 +42,92 @@
           <h2 id="totalTasks">0</h2>
           <small>All your learning goals</small>
         </article>
+
         <article class="stat-card">
           <div class="stat-icon green">✓</div>
           <p>Completed</p>
           <h2 id="completedTasks">0</h2>
           <small>Tasks you've finished</small>
         </article>
+
         <article class="stat-card">
           <div class="stat-icon orange">◷</div>
           <p>Pending</p>
           <h2 id="pendingTasks">0</h2>
-          <small>Keep moving forward</small>
+          <small>Tasks still to do</small>
         </article>
       </section>
 
       <section class="panel progress-panel">
         <div class="panel-heading">
           <div>
-            <h2>Your progress</h2>
-            <p class="muted">Every completed task takes you closer to your goals.</p>
+            <h2>Overall progress</h2>
+            <p class="muted">Every task takes you closer to your goals.</p>
           </div>
           <strong class="percentage" id="progressPercent">0%</strong>
         </div>
+
         <div class="progress-track">
           <div class="progress-fill" id="progressFill"></div>
         </div>
-        <p class="progress-note" id="progressNote">Let's complete your first task!</p>
+
+        <p class="progress-note" id="progressNote">
+          Let's complete your first task!
+        </p>
+      </section>
+
+      <section class="panel weekly-panel">
+        <div class="panel-heading">
+          <div>
+            <h2>Weekly learning goal 🎯</h2>
+            <p class="muted">Build a consistent learning habit.</p>
+          </div>
+          <strong class="percentage" id="weeklyPercent">0%</strong>
+        </div>
+
+        <form id="weeklyGoalForm" class="weekly-controls">
+          <div class="goal-input-group">
+            <label for="weeklyGoalInput">Weekly target (tasks)</label>
+            <input
+              type="number"
+              id="weeklyGoalInput"
+              min="1"
+              max="100"
+              value="5"
+              required
+            >
+          </div>
+          <button type="submit" class="primary-btn">Save goal</button>
+        </form>
+
+        <div class="progress-track">
+          <div class="weekly-fill" id="weeklyProgressFill"></div>
+        </div>
+
+        <p class="progress-note" id="weeklyProgressText">
+          0 of 5 tasks completed this week.
+        </p>
+        <p class="muted weekly-note" id="weeklyProgressNote">
+          Start small and keep going!
+        </p>
       </section>
 
       <section class="workspace" id="tasks">
         <section class="panel task-panel">
-          <div class="panel-heading">
-            <div>
-              <h2>My learning tasks</h2>
-              <p class="muted">Plan your next step and stay consistent.</p>
-            </div>
-          </div>
+          <h2>My learning tasks</h2>
+          <p class="muted">Plan your next step and stay consistent.</p>
 
           <form id="taskForm">
             <label for="taskName">Task name</label>
-            <input id="taskName" type="text"
-                   placeholder="e.g. Practise JavaScript" required maxlength="120">
+            <input
+              id="taskName"
+              type="text"
+              placeholder="e.g. Practise JavaScript"
+              maxlength="120"
+              required
+            >
 
-            <label for="taskDeadline">Deadline</label>
+            <label for="taskDeadline">Deadline (optional)</label>
             <input id="taskDeadline" type="date">
 
             <button class="primary-btn" type="submit">+ Add task</button>
@@ -94,7 +139,7 @@
         <aside class="panel tip-panel">
           <div class="tip-icon">✦</div>
           <h2>A little reminder</h2>
-          <p>You don't need to learn everything in one day. Focus on one skill, finish one task, and keep building.</p>
+          <p>You don't need to learn everything in one day. Focus on one skill and finish one task at a time.</p>
           <div class="tip-line"></div>
           <strong>Today's rule</strong>
           <p class="muted">Consistency beats perfection.</p>

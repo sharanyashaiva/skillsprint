@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -24,7 +25,7 @@ body {
 
 .sidebar {
   width: 245px;
-  background: #fff;
+  background: white;
   border-right: 1px solid var(--line);
   padding: 30px 18px;
   display: flex;
@@ -46,7 +47,7 @@ body {
   margin: 0 12px 12px;
   color: #98a2b6;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: bold;
   letter-spacing: 1.5px;
 }
 
@@ -59,10 +60,11 @@ body {
   font-size: 14px;
 }
 
+.nav:hover,
 .nav.active {
   background: #edf1ff;
   color: var(--blue);
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .sidebar-bottom {
@@ -119,7 +121,7 @@ body {
   color: var(--blue);
   letter-spacing: 2px;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: bold;
 }
 
 h1 {
@@ -205,7 +207,8 @@ h1 {
   padding: 25px;
 }
 
-.progress-panel {
+.progress-panel,
+.weekly-panel {
   margin-bottom: 20px;
 }
 
@@ -221,9 +224,10 @@ h1 {
   margin: 0 0 7px;
 }
 
-.panel-heading p {
+.panel-heading p,
+.task-panel > p {
   font-size: 12px;
-  margin: 0;
+  margin-top: 0;
 }
 
 .percentage {
@@ -239,18 +243,70 @@ h1 {
   margin-top: 22px;
 }
 
-.progress-fill {
+.progress-fill,
+.weekly-fill {
   width: 0;
   height: 100%;
-  background: linear-gradient(90deg, #345de7, #7690ff);
   border-radius: inherit;
   transition: width 0.3s ease;
+}
+
+.progress-fill {
+  background: linear-gradient(90deg, #345de7, #7690ff);
+}
+
+.weekly-fill {
+  background: linear-gradient(90deg, #159b69, #65d6a3);
 }
 
 .progress-note {
   color: var(--muted);
   font-size: 12px;
   margin: 12px 0 0;
+}
+
+.weekly-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.goal-input-group {
+  display: grid;
+  gap: 8px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.goal-input-group label,
+#taskForm label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.goal-input-group input,
+#taskForm input {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid #dce3ef;
+  border-radius: 9px;
+  font: inherit;
+  color: var(--dark);
+  background: white;
+}
+
+.goal-input-group input:focus,
+#taskForm input:focus {
+  outline: 2px solid #cbd6ff;
+  border-color: var(--blue);
+}
+
+.weekly-note {
+  font-size: 12px;
+  margin-bottom: 0;
 }
 
 .workspace {
@@ -270,26 +326,8 @@ h1 {
   margin-top: 22px;
 }
 
-#taskForm label {
-  font-size: 12px;
-  font-weight: 700;
-}
-
 #taskForm input {
-  width: 100%;
-  min-width: 0;
-  padding: 12px;
-  border: 1px solid #dce3ef;
-  border-radius: 9px;
-  font: inherit;
   margin-bottom: 8px;
-  color: var(--dark);
-  background: #fff;
-}
-
-#taskForm input:focus {
-  outline: 2px solid #cbd6ff;
-  border-color: var(--blue);
 }
 
 button {
@@ -303,7 +341,7 @@ button {
   border: 0;
   padding: 12px 17px;
   border-radius: 9px;
-  font-weight: 700;
+  font-weight: bold;
   justify-self: start;
 }
 
@@ -357,7 +395,7 @@ button {
   border: 0;
   border-radius: 7px;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .done-btn {
@@ -374,10 +412,6 @@ button {
   color: var(--muted);
   font-size: 13px;
   padding: 20px 0;
-}
-
-.tip-panel {
-  background: #fff;
 }
 
 .tip-icon {
